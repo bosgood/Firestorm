@@ -5,9 +5,14 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const repl = require('repl');
 
+const {
+  PORT = 80,
+  DISCOVERY_PORT = 1889
+} = process.env;
+
 discovery.start({
   host: '0.0.0.0',
-  port: 1889
+  port: DISCOVERY_PORT
 });
 
 
