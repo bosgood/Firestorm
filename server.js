@@ -1,6 +1,6 @@
 const discovery = require('./app/discovery');
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const repl = require('repl');
@@ -15,25 +15,20 @@ discovery.start({
   port: DISCOVERY_PORT
 });
 
-
 app.use(bodyParser.json());
-
-const {PORT = 80} = process.env
-
 require("./app/api")(app);
-
-app.use(compression())
+app.use(compression());
 app.use(express.static('build'));
 
-console.log('listening on %s', PORT)
-app.listen(PORT)
+console.log('listening on %s', PORT);
+app.listen(PORT);
 
-
-const r = repl.start('> ');
-r.on('exit', () => {
-  console.log('Received "exit" event from repl!');
-  process.exit();
-});
-r.context.discoveries = discovery.discoveries;
-r.context.reqire = require;
-
+if (process.stdout.isTTY) {
+  const r = repl.start('> ');
+  r.on('exit', () => {
+    console.log('Received "exit" event from repl!');
+    process.exit();
+  });
+  r.context.discoveries = discovery.discoveries;
+  r.context.reqire = require;
+}
