@@ -30,5 +30,5 @@ if (process.stdout.isTTY) {
     process.exit();
   });
   r.context.discoveries = discovery.discoveries;
-  r.context.reqire = require;
+  r.context.require = require;
 }
