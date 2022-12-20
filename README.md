@@ -168,6 +168,22 @@ The command JSON should be URL encoded, and the ids are comma separated.
 /command?command=%7B%22programName%22%3A+%22blink+fade%22%7D&ids=6909667,9398311
 ```
 
+## /playlist (POST)
+
+Sets the server playlist state. Firestorm implements a pattern coordination system that can trigger discovered Pixelblazes to switch patterns on a customizable interval.
+
+Like `/command`, if a Pixelblaze included in pattern coordination drops off the network temporarily, coordination will resume when it returns, with a grace period of 30 minutes.
+
+```json
+{
+  "ids": [
+    6909667,
+    9398311
+  ],
+  "state": "running" // "stopped"
+}
+```
+
 ## /reload (POST)
 
 Triggers reloading config and patterns from all controllers. No body is required.

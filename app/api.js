@@ -26,6 +26,7 @@ module.exports = function (app) {
       _.assign(res, v.controller.props);
       return res;
     }));
+    // TODO [bosgood] Return playlist state here too? Or part of PixelblazeController props?
   })
 
   app.post("/command", function (req, res) {
