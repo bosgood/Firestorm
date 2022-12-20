@@ -37,15 +37,6 @@ const PROPFIELDS = [
   'ver', 'fps', 'exp', 'vmerr', 'mem', 'pixelCount', 'ledType', 'dataSpeed', 'colorOrder', 'buferType', 'sequenceTimer', 'sequencerEnable', 'brightness', 'name'
 ];
 
-function readAsUtf8(buf, cb) {
-  var bb = new Blob([new Uint8Array(buf)]);
-  var f = new FileReader();
-  f.onload = function(e) {
-    cb(e.target.result);
-  };
-  f.readAsText(bb);
-}
-
 module.exports = class PixelblazeController {
   constructor(props, command) {
     this.props = props;
