@@ -9,6 +9,9 @@
 # production
 /build
 
+# application state
+state.json
+
 # misc
 .DS_Store
 .env.local

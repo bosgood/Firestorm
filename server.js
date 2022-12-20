@@ -1,14 +1,21 @@
-const discovery = require('./app/discovery');
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const repl = require('repl');
 
+const app = express();
+const discovery = require('./app/discovery');
+const persistence = require('./app/persistence');
+
 const {
   PORT = 80,
-  DISCOVERY_PORT = 1889
+  DISCOVERY_PORT = 1889,
+  STATE_FILENAME
 } = process.env;
+
+if (STATE_FILENAME) {
+  persistence.STATE_FILENAME = STATE_FILENAME;
+}
 
 discovery.start({
   host: '0.0.0.0',
@@ -30,5 +37,6 @@ if (process.stdout.isTTY) {
     process.exit();
   });
   r.context.discoveries = discovery.discoveries;
+  r.context.persistence = persistence;
   r.context.require = require;
 }
