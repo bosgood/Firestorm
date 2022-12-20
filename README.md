@@ -37,8 +37,8 @@ The following was validated working in June, 2022 for a clean install of Raspber
 ```
 # First get node and yarn going
 
-# As of mid-2022, Debian 10 updates node to 10.24.0, which is not ok. 
-# NodeSource maintains an APT repository containing the latest versions 
+# As of mid-2022, Debian 10 updates node to 10.24.0, which is not ok.
+# NodeSource maintains an APT repository containing the latest versions
 # of Node.js. First we'll add their repo for Node 16. A sufficient
 # version of npm is included.
 curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
@@ -64,7 +64,7 @@ alias pm2='authbind --deep pm2'
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
 # If you get "No such file or directory", run `pm2 startup` to see the correct command
 
-# now get Firestorm 
+# now get Firestorm
 cd ~
 git clone https://github.com/simap/Firestorm.git
 cd Firestorm
@@ -74,7 +74,7 @@ yarn build
 
 # I believe the pm2 alias with authbind is critical here
 # Alternatively `authbind --deep pm2 start server.js` might work
-pm2 start server.js 
+pm2 start server.js
 pm2 save
 
 ```
@@ -109,7 +109,7 @@ Returns a list of all known Pixelblaze controllers along with their pattern list
 
 e.g.
 
-```
+```json
 [
   {
     "lastSeen": 1534033419191,
@@ -146,7 +146,7 @@ Most other settings (e.g. the above) can be changed through this API, for exampl
 
 If a Pixelblaze is unavailable or drops off the network temporarily, the settings will be reapplied when it comes back, for up to 5 minutes.
 
-```
+```json
 {
   "command": {
     "programName": "blink fade"
@@ -172,17 +172,15 @@ The command JSON should be URL encoded, and the ids are comma separated.
 
 Triggers reloading config and patterns from all controllers. No body is required.
 
-
 ## /clonePrograms (POST)
 
 Clone all programs from one controller to another. Programs that are on the destinations that don't exist on the source will be deleted so that they match exactly.
 
-```
+```json
 {
   "from": 6909667,
   "to": [9398311,38473234]
 }
-
 ```
 
 
